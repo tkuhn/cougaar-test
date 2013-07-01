@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="cougaar/lib/bootstrap.jar"/>
+	<classpathentry kind="lib" path="cougaar/lib/build.jar"/>
+	<classpathentry kind="lib" path="cougaar/lib/core.jar"/>
+	<classpathentry kind="lib" path="cougaar/lib/cougaar.jar"/>
+	<classpathentry kind="lib" path="cougaar/lib/mtslinks.jar"/>
+	<classpathentry kind="lib" path="cougaar/lib/mtsstd.jar"/>
+	<classpathentry kind="lib" path="cougaar/lib/planning.jar"/>
+	<classpathentry kind="lib" path="cougaar/lib/profile.jar"/>
+	<classpathentry kind="lib" path="cougaar/lib/qos.jar"/>
+	<classpathentry kind="lib" path="cougaar/lib/qrs.jar"/>
+	<classpathentry kind="lib" path="cougaar/lib/util.jar"/>
+	<classpathentry kind="lib" path="cougaar/lib/webmicro.jar"/>
+	<classpathentry kind="lib" path="cougaar/lib/webserver.jar"/>
+	<classpathentry kind="lib" path="cougaar/lib/webtomcat.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

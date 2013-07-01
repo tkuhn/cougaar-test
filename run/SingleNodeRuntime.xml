@@ -1,0 +1,9 @@
+<?xml version='1.0'?>
+
+<runtime>
+
+  <vm_parameter
+    name="-Dorg.cougaar.society.xsl.param.template"
+    value="single_node"/>
+
+</runtime>
