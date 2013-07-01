@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="hello" basedir="." default="jar">
+
+  <property environment="env"/>
+  <condition property="CIP" value="${env.COUGAAR_INSTALL_PATH}" else="../../cougaar">
+    <isset property="env.COUGAAR_INSTALL_PATH"/>
+  </condition>
+  <condition property="BOOTSTRAP_JAR" value="../../util/bootstrap/tmp/bootstrap.jar" else="${CIP}/lib/bootstrap.jar">
+	<available file="$../../util/bootstrap/tmp/bootstrap.jar"/>
+  </condition>
+  <condition property="UTIL_JAR" value="../../util/util/tmp/util.jar" else="${CIP}/lib/util.jar">
+	<available file="../../util/util/tmp/util.jar"/>
+  </condition>
+  <condition property="CORE_JAR" value="../../core/core/tmp/core.jar" else="${CIP}/lib/core.jar">
+	<available file="../../core/core/tmp/core.jar"/>
+  </condition>
+  <condition property="SERVLET_JAR" value="../../core/jars/lib/servlet.jar" else="${CIP}/sys/servlet.jar">
+	<available file="../../core/jars/lib/servlet.jar"/>
+  </condition>
+	
+  <!--- Configure all required paths -->
+  <property name="src.dir" value="${basedir}/src" description="Java source files" />
+  <property name="build.dir" value="${basedir}/tmp" description="Build base " />
+  <property name="classes.dir" value="${build.dir}/classes" description="Class files" />
+
+  <!--- Compiler properties -->
+  <property name="compile.deprecation" value="true" />
+  <property name="compile.debug" value="on" />
+  <property name="compile.optimize" value="off" />
+
+  <path id="compile.classpath">
+    <pathelement location="${BOOTSTRAP_JAR}" />
+    <pathelement location="${UTIL_JAR}" />
+    <pathelement location="${CORE_JAR}" />
+    <pathelement location="${SERVLET_JAR}" />
+  </path>
+
+  <patternset id="ps.jar.extras">
+    <include name="**/*.xml"/>
+    <include name="**/*.dtd"/>
+    <include name="**/*.properties"/>
+    <include name="**/*.png"/>
+  </patternset>
+
+  <target name="init" description="Initialize the build env.  Check for required properties">
+    
+  </target>
+
+  <target name="prepare" depends="init" description="Prepares for building, creates required directories">
+    <tstamp />
+    <mkdir dir="${build.dir}" description="Creates the build directory" />
+    <mkdir dir="${classes.dir}" description="Creates the classes directory" />
+  </target>
+
+  <target name="compile" depends="prepare" description="Compiles all source files .">
+    <javac srcdir="${src.dir}" destdir="${classes.dir}" debug="${compile.debug}" deprecation="${compile.deprecation}" optimize="${compile.optimize}" encoding="ISO-8859-1" includeantruntime="no">
+      <classpath>
+	<path refid="compile.classpath" />
+      </classpath>
+    </javac>
+    <copy todir="${classes.dir}" >
+      <fileset dir="${src.dir}">
+        <patternset refid="ps.jar.extras"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="jar" depends="compile" description="Creates a jar file for this module.">
+    <mkdir dir="${basedir}/lib" />
+    <jar jarfile="${basedir}/lib/${ant.project.name}.jar" casesensitive="yes">
+      <manifest>
+        <attribute name="Application-Title" value="Cougaar - ${ant.project.name}" />
+        <attribute name="Built-By" value="${user.name}" />
+        <attribute name="Build-Date" value="${TODAY}" />
+        <attribute name="Implementation-Version" value="1" />
+      </manifest>
+      <fileset dir="${classes.dir}" />
+    </jar>
+  </target>
+
+  <target name="install" depends="jar" description="Creates jar and copies it and sys jars to $CIP">
+    <copy file="${build.dir}/${ant.project.name}.jar" todir="${cip.lib}"/>
+  </target>
+
+  <target name="clean" depends="" description="Deletes all class files and all module generated jars">
+    <delete dir="${build.dir}" />
+  </target>
+</project>

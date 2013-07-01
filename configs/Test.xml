@@ -1,0 +1,9 @@
+<?xml version='1.0'?>
+
+<society>
+  <node name="Node1">
+    <agent name="AgentA">
+      <component class="ch.tkuhn.cougaar.test.TestPlugin"/>
+    </agent>
+  </node>
+</society>
