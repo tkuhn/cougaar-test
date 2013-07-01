@@ -3,7 +3,26 @@
 <society>
   <node name="Node1">
     <agent name="AgentA">
-      <component class="ch.tkuhn.cougaar.test.TestPlugin"/>
+      <component class="ch.tkuhn.cougaar.test.Agent">
+        <argument name="posX" value="1"/>
+        <argument name="posY" value="2"/>
+      </component>
+    </agent>
+    <agent name="FoodA">
+      <component class="ch.tkuhn.cougaar.test.Food">
+        <argument name="posX" value="2"/>
+        <argument name="posY" value="3"/>
+      </component>
+    </agent>
+    <agent name="EnvironmentX">
+      <component class="ch.tkuhn.cougaar.test.Agent">
+        <argument name="posX" value="5"/>
+        <argument name="posY" value="5"/>
+      </component>
+      <component class="ch.tkuhn.cougaar.test.Food">
+        <argument name="posX" value="6"/>
+        <argument name="posY" value="6"/>
+      </component>
     </agent>
   </node>
 </society>
